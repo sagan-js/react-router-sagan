@@ -9,6 +9,7 @@ class ConnectedRouter extends React.Component {
   constructor(props) {
     super(props)
     this.handleLocationChange = this.handleLocationChange.bind(this)
+    this.initialize()
   }
 
   static propTypes = {
@@ -19,11 +20,7 @@ class ConnectedRouter extends React.Component {
     dispatch: PropTypes.func.isRequired
   }
 
-  handleLocationChange(location) {
-    this.props.dispatch({type: 'location/change', payload: location})
-  };
-
-  UNSAFE_componentWillMount() {
+  initialize() {
     const { history, isSSR } = this.props
 
     if (!isSSR) {
@@ -32,6 +29,10 @@ class ConnectedRouter extends React.Component {
 
     this.handleLocationChange(history.location)
   }
+
+  handleLocationChange(location) {
+    this.props.dispatch({type: 'location/change', payload: location})
+  };
 
   componentWillUnmount() {
     if (this.unsubscribeFromHistory) {this.unsubscribeFromHistory()}
