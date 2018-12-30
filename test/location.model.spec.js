@@ -1,4 +1,4 @@
-import { createBrowserHistory } from 'history'
+import createHistory from 'history/createBrowserHistory'
 import Location from '../src/location.model'
 
 import { BaseModel, Store } from 'sagan'
@@ -6,21 +6,23 @@ import { BaseModel, Store } from 'sagan'
 describe('Store', () => {
     it('throws if props don\'t pass validation', () => {
 
-        const history = createBrowserHistory()
+        const history = createHistory()
         const location = new Location(history.location)
 
-        const spy1 = jest.spyOn(global.console, 'error')
-        BaseModel.prototype.checkTypes(history.location, location.typeMap)
-        expect(spy1).not.toHaveBeenCalled()
+        console.error = jest.fn();
 
-        const spy2 = jest.spyOn(global.console, 'error')
+        BaseModel.prototype.checkTypes(history.location, location.typeMap)
+        expect(console.error).not.toHaveBeenCalled()
+        console.error.mockRestore()
+
         BaseModel.prototype.checkTypes({name: 'Sagan'}, location.typeMap)
-        expect(spy2).toHaveBeenCalled()
+        expect(console.error).toHaveBeenCalled()
+        console.error.mockRestore()
     })
 
     it('updates location state on route change dispatch', () => {
 
-        const history = createBrowserHistory()
+        const history = createHistory()
 
         const store = new Store({
             models: {
