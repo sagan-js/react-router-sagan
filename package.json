@@ -1,6 +1,6 @@
 {
   "name": "react-router-sagan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official React Router bindings for Sagan",
   "main": "lib/index.js",
   "unpkg": "dist/index.js",
@@ -74,7 +74,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-router": "^4.3.1",
-    "react-sagan": "^1.0.0",
-    "sagan": "^1.0.0"
-  }
+    "react-sagan": "^1.0.1",
+    "sagan": "^1.1.0"
+  },
+  "gitHead": "5e4cf465779cd7e0ff55258fab9502bcfd170402"
 }
